@@ -1,3 +1,18 @@
+import java.io.File
+
+object ScriptPython {
+
+    var python_exe: List<Process> = listOf()
+
+    val host = "localhost"
+    val user = "root"
+    val passwd = "root"
+    val database = "secureatm"
+
+    fun escreverPython(python: Int): String {
+
+        val script_python = """
+
 import psutil
 import mysql.connector
 from datetime import date, datetime
@@ -6,8 +21,8 @@ from datetime import date, datetime
 
 while True:
     # FK do ATM associado a leitura em banco
-    fk_atm = input("Qual ATM deve ser monitorado?")
-    
+    fk_atm = 1
+
     resposta = input("Quer ver os dados? (s/n): ")
     if resposta == "s":
 
@@ -59,3 +74,23 @@ while True:
                 mycursor.close()
                 mydb.close()
     else: break
+
+
+    """.trimIndent()
+
+        val nome_arquivo_python = "script_python.py"
+        File(nome_arquivo_python).writeText(python_geral)
+        return nome_arquivo_python
+    }
+
+    fun executar(arquivo: String) {
+        val python_process = Runtime.getRuntime().exec("py $arquivo")
+        python_exe = listOf(python_process)
+    }
+
+    fun pararScript() {
+        for (process in python_exe) {
+            process.destroyForcibly()
+        }
+    }
+}
