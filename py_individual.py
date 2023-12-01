@@ -39,7 +39,7 @@ while True:
             if mydb.is_connected():
                 print("Banco conectado")
                 # Lista de variáveis que carregam os dados colhidos que serão inseridos nessa iteração EM ORDEM
-                dados_insert = [data_hora_formatada, ram_percent, 1, fk_atm , 1]
+                dados_insert = [data_hora_formatada, ram_percent, 1, fk_atm , 3]
                 # Retorna a versão atual do SQL / infos de sistema do banco
                 db_info = mydb.get_server_info()
                 # Abre cursor permitindo inserção

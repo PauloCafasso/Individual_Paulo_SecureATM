@@ -22,6 +22,8 @@ open class Main {
                     }
                 }, 2000)
 
+            print("Qual ATM deve ser monitorado?")
+            val fk_atm = Scanner.nextLine()
 
             fun chamarCaptura(repositorio: Repositorio):Ram {
 
