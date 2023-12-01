@@ -10,8 +10,7 @@ class Conexao {
         dataSource.driverClassName = "com.mysql.cj.jdbc.Driver" // Define o driver JDBC para o MySQL
         dataSource.url = "jdbc:mysql://localhost:3306/SecureATM" // URL do banco de dados
         dataSource.username = "root" // Nome de usuário do banco de dados
-        //dataSource.password = "#Gf48556583830" // Senha do banco de dados
-        dataSource.password = "root"
+        dataSource.password = "root" // configuração de senha do usuario
         return JdbcTemplate(dataSource) // Retorna um objeto JdbcTemplate configurado com o DataSource
     }
 

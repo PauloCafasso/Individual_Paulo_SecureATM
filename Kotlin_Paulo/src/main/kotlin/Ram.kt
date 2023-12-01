@@ -6,6 +6,5 @@ class Ram(
     val disponivel: Long,
     val total:Long) {
     var data_registro =LocalDateTime.now()
-
-
+    var fkATM:Int = 0
 }

@@ -13,12 +13,13 @@ class Repositorio{
 
     fun inserir(captura:Ram) {
         jdbcTemplate.update("""
-            INSERT INTO leitura() VALUES (null,?, ?, 1, 1 , 1)
+            INSERT INTO leitura() VALUES (null,?, ?, 1, ? , 1)
         """,
             captura.data_registro,
-            captura.valor
+            captura.valor,
+            captura.fkATM
         )
-
+        app()
     }
 
     fun capturarRam():Ram{
