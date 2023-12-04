@@ -2,16 +2,22 @@ import psutil
 import mysql.connector
 from datetime import date, datetime
 import time
-
+import pymssql
 
 # Pergunta ao usuário apenas uma vez
 fk_atm = input("Qual ATM deve ser monitorado?")
-
 
 # Pergunta ao usuário se deseja ver os dados uma vez fora do loop
 resposta = input("Quer ver os dados? (s/n): ")
 if resposta == "s":
     while True:
+
+        sql_server_cnx = pymssql.connect(
+        server='18.204.118.27',
+        database='SecureATM',
+        user='sa',
+        password='Secure2023'
+        )
 
         mydb = mysql.connector.connect(
         host='localhost',
@@ -44,19 +50,22 @@ if resposta == "s":
 
                 # Retorna a versão atual do SQL / infos de sistema do banco
                 db_info = mydb.get_server_info()
-
+                
                 # Abre cursor permitindo inserção
                 mycursor = mydb.cursor()
+                cursor_sql_server = sql_server_cnx.cursor()
 
                 # Inserção stringificada
                 sql_query = "INSERT INTO leitura (DataRegistro, Valor, Componente_ID, ATMComp_ID, APIID) VALUES (%s,%s,%s,%s,%s)"
+                sql_server_query="INSERT INTO leitura (DataRegistro, Valor, Componente_ID, ATMComp_ID, APIID) VALUES (%s,%s,%s,%s,%s)"
 
                 # Cursor executa a query e é feito o commit da transação
                 mycursor.execute(sql_query, dados_insert)
-
+                cursor_sql_server.execute(sql_server_query, dados_insert)
+                                  
                 # Commit para efetivar a transação
                 mydb.commit()
-
+                sql_server_cnx.commit()
                 # Fecha cursor e conexão idependente do sucesso na inserção
                 if mydb.is_connected():
                     mycursor.close()
