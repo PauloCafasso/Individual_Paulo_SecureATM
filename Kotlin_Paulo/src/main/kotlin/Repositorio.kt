@@ -19,7 +19,11 @@ class Repositorio{
             captura.valor,
             captura.fkATM
         )
-        app()
+        Timer().schedule(object : TimerTask() {
+            override fun run() {
+                app()
+            }
+        }, 20000)
     }
 
     fun capturarRam():Ram{

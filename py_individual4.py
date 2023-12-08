@@ -51,10 +51,10 @@ if resposta == "s":
                 data_hora_formatada = '{} {}'.format(data_formatada, hora_formatada)
 
                 #dados usados para consulta no banco nessa iteração EM ORDEM
-                dados_select = [fk_atm] #, data_hora_formatada
+                dados_select = [fk_atm] 
                 
                 #configurar o APIID da api de kotlin
-                mycursor.execute("SELECT  Valor FROM leitura WHERE ATMComp_ID=%s AND APIID=3 AND Componente_ID=1 AND DataRegistro='2023-11-30 11:01:32';", dados_select)
+                mycursor.execute("SELECT  Valor FROM leitura WHERE ATMComp_ID=%s AND APIID=3 AND Componente_ID=1 ORDER BY leituraID desc limit 1;", dados_select)
                 resultados = mycursor.fetchall()
                 valor= float(resultados[0][0])
                 print(valor)

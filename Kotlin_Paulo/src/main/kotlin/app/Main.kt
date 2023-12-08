@@ -37,7 +37,7 @@ open class Main {
                 override fun run() {
                     repositorio.inserir(chamarCaptura(repositorio))
                 }
-            }, 2000)
+            }, 20000)
         }
     }
 }
